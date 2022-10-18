@@ -1,0 +1,30 @@
+{
+    "serverlessConsole.services": [
+        {
+            "type": "cloudformation",
+            "title": "lambda",
+            "timeOffsetInMs": 0,
+            "awsProfile": "items-training",
+            "stacks": [
+                {
+                    "region": "us-east-1",
+                    "stackName": "alegra-soccer-team-lambda-undefined",
+                    "stage": "dev"
+                }
+            ]
+        },
+        {
+            "type": "cloudformation",
+            "title": "dynamo",
+            "timeOffsetInMs": 0,
+            "awsProfile": "items-training",
+            "stacks": [
+                {
+                    "region": "us-east-1",
+                    "stackName": "alegra-soccer-team-dynamodb-undefined",
+                    "stage": "dev"
+                }
+            ]
+        }
+    ]
+}
