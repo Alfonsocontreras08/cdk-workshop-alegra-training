@@ -10,3 +10,9 @@ export function getCdkPropsFromCustomProps(props:StackBasicProps){
     };
 }
 
+
+export function getDefaultResourceName(props:StackBasicProps,name:string){
+  return `${props.name}-${name}-${props.environment}`;
+}
+
+

@@ -6,31 +6,42 @@ import { ApiStack } from '../lib/api-stack';
 import { LambdaStack } from '../lib/lambda-stack';
 
 const app = new cdk.App();
-const account = "159688459304";
 const appName = "alegra-soccer-team";
 
 //const env = "training"; // o tambien
 const env = app.node.tryGetContext("env"); //optiene del contexto de node
+const account = app.node.tryGetContext("account-id"); //optiene del contexto de node
+
+if(env === undefined || account === undefined){
+  throw new Error("Invalid Env or account-id");
+}
+
+const propsDefaultStack = {
+    //name:`${appName}-${stackName}`,
+    account,
+    region:"us-east-1",
+    environment:env
+}
+
+
+
 
 const dynamoStack = new DynamoStack(app, 'DynamoStack', {
-  name:`${appName}-dynamodb-${env}`,
-  account,
-  region:"us-east-1",
+  ...propsDefaultStack,
+  name:"DynamDBStack"
 });
 
 
+
 const lambdaStack = new LambdaStack(app,"LambdaStack",{
-  name:`${appName}-lambda-${env}`,
-  account,
-  region:"us-east-1",
-  dynamoStack:dynamoStack
+  ...propsDefaultStack,
+  name:"LambdaStack",
+  dynamoStack
 });
 
 
 new ApiStack(app,"ApiStack",{
-  name:`${appName}-apiGateway-${env}`,
-  account,
-  region:"us-east-1",
+  ...propsDefaultStack,
+  name:"ApiStack",
   lambdaStack
 });
-

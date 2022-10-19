@@ -3,7 +3,7 @@ import * as cdk  from 'aws-cdk-lib';
 import { aws_apigateway as apiGW }  from 'aws-cdk-lib';
 
 import { ApiStackProps } from '../interfaces';
-import { getCdkPropsFromCustomProps } from "../utils";
+import { getCdkPropsFromCustomProps, getDefaultResourceName } from "../utils";
 
 export class ApiStack extends cdk.Stack{
     constructor(scope: cdk.App, id:string, props:ApiStackProps ){
@@ -11,10 +11,10 @@ export class ApiStack extends cdk.Stack{
         
         const lambdaStack = props.lambdaStack;
 
-        const apiRest = new apiGW.RestApi(this,id,{
-            restApiName:`api-${props.name}`,
+        const apiRest = new apiGW.RestApi(this,"APIGW",{
+            restApiName: getDefaultResourceName(props,"ApiGW-LambdaFunction-players"),
             deployOptions:{
-                stageName:props.name,
+                stageName:getDefaultResourceName(props,"ApiGW-LambdaFunction-players"),
             },
         });
 
