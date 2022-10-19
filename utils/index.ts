@@ -6,7 +6,7 @@ export function getCdkPropsFromCustomProps(props:StackBasicProps){
       env:{
         account:props.account,
         region:props.region
-      }
+      },
     };
 }
 

@@ -10,7 +10,7 @@ export class LambdaStack extends cdk.Stack{
 
     constructor(scope: cdk.App, id:string, props:LambdaStackProps ){
         super(scope ,id, getCdkPropsFromCustomProps(props));
-
+        
         const dynamo = props.dynamoStack;
 
         this.createPlayer = new lambda.Function(this,`create_player`,{
