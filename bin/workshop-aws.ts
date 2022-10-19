@@ -17,7 +17,6 @@ if(env === undefined || account === undefined){
 }
 
 const propsDefaultStack = {
-    //name:`${appName}-${stackName}`,
     account,
     region:"us-east-1",
     environment:env
@@ -28,20 +27,20 @@ const propsDefaultStack = {
 
 const dynamoStack = new DynamoStack(app, 'DynamoStack', {
   ...propsDefaultStack,
-  name:"DynamDBStack"
+  name:`${appName}-DynamDBStac`
 });
 
 
 
 const lambdaStack = new LambdaStack(app,"LambdaStack",{
   ...propsDefaultStack,
-  name:"LambdaStack",
+  name:`${appName}-LambdaStack`,
   dynamoStack
 });
 
 
 new ApiStack(app,"ApiStack",{
   ...propsDefaultStack,
-  name:"ApiStack",
+  name:`${appName}-ApiStack`,
   lambdaStack
 });
