@@ -1,14 +1,22 @@
-# Welcome to your CDK TypeScript project
+# Bienvenido a mi Training CDK
 
-This is a blank project for CDK development with TypeScript.
+# 1) cambiar el account-id
+    cdk.json/content/account-id
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+# 2) cambiar el profile en package.json
 
-## Useful commands
+# 3) npm i && npm i -d
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+
+## Lista de Comandos
+
+* `npm run deploy`                  despliega la aplicacion
+* `npm run deployLambda`            despliega solo los lambdas
+* `npm run destroy`                 elimina la aplicacion , sin remover datos sencibles "s3,dynamoDB-table etc"
+* `cdk diff`                        compara antiguo stack con el actual
+
+## ejemplo 
+
+* `npm run build -- -c env=test`    despliega la aplicacion con el sufijo test. 
+nota: variable "env" obligatoria
+ 

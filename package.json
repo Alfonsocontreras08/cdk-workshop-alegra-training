@@ -11,7 +11,7 @@
     "cdk": "cdk",
     "diff": "cdk diff --profile items-training",
     "deployLambda": "cdk deploy LambdaStack --profile items-training",
-    "deploy": "cdk deploy --profile items-training --all",
+    "deploy": "cdk deploy --profile items-training  --all",
     "destroy": "cdk destroy --profile items-training --all"
   },
   "devDependencies": {
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "2.46.0",
-    "constructs": "^10.0.0",
+    "constructs": "^10.1.133",
     "source-map-support": "^0.5.21"
   }
 }

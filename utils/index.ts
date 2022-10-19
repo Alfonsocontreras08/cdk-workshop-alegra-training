@@ -6,7 +6,11 @@ export function getCdkPropsFromCustomProps(props:StackBasicProps){
       env:{
         account:props.account,
         region:props.region
-      }
+      },
     };
 }
 
+
+export function getDefaultResourceName(props:StackBasicProps,name:string){
+  return `${props.name}-${name}`;
+}

@@ -1,8 +1,7 @@
 import * as cdk  from 'aws-cdk-lib';
 import * as lambda from "aws-cdk-lib/aws-lambda";
-import { Lambda } from 'aws-cdk-lib/aws-ses-actions';
-import { StackBasicProps,LambdaStackProps } from '../interfaces';
-import { getCdkPropsFromCustomProps } from "../utils";
+import { LambdaStackProps } from '../interfaces';
+import { getCdkPropsFromCustomProps, getDefaultResourceName } from "../utils";
 
 export class LambdaStack extends cdk.Stack{
     public readonly createPlayer:lambda.Function;
@@ -10,26 +9,26 @@ export class LambdaStack extends cdk.Stack{
 
     constructor(scope: cdk.App, id:string, props:LambdaStackProps ){
         super(scope ,id, getCdkPropsFromCustomProps(props));
-
+        
         const dynamo = props.dynamoStack;
 
-        this.createPlayer = new lambda.Function(this,`${id}-create_player`,{
+        this.createPlayer = new lambda.Function(this,`${getDefaultResourceName(props,"LambdaFuncion_create-player")}-${props.environment}`,{
             code: lambda.Code.fromAsset("lambdas/players"),
             handler:"create-player.handler",
             runtime:lambda.Runtime.NODEJS_16_X,
-            functionName: `${props.name}_create-player`,
+            functionName: `${getDefaultResourceName(props,"LambdaFuncion_create-player")}-${props.environment}`,
             environment:{
-                PLAYER_TABLE_NAME: cdk.Fn.importValue(`alegra-soccer-team-dynamodb-undefined`) 
+                PLAYER_TABLE_NAME: "alegra-soccer-team-dynamoDBTable-training"//cdk.Fn.importValue("OutputTableName-Player") 
             }
         });
 
-        this.getPlayer = new lambda.Function(this,`${id}-get_player`,{
+        this.getPlayer = new lambda.Function(this,`${getDefaultResourceName(props,"LambdaFuncion_get-player")}-${props.environment}`,{
             code:lambda.Code.fromAsset('lambdas/players'),
             handler:"get-players.handler",
             runtime:lambda.Runtime.NODEJS_16_X,
-            functionName: `${props.name}_get-player`,
+            functionName: `${getDefaultResourceName(props,"LambdaFuncion_get-player")}-${props.environment}`,
             environment:{
-                PLAYER_TABLE_NAME: cdk.Fn.importValue(`alegra-soccer-team-dynamodb-undefined`) 
+                PLAYER_TABLE_NAME: "alegra-soccer-team-dynamoDBTable-training"//cdk.Fn.importValue("OutputTableName-Player") 
             }
         })
 

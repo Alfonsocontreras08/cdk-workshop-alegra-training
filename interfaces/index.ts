@@ -4,7 +4,8 @@ import { LambdaStack } from "../lib/lambda-stack";
 export interface StackBasicProps {
     name: string,
     account:string,
-    region:string
+    region:string,
+    environment:string
 }
 
 
